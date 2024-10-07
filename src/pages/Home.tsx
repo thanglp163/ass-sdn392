@@ -5,9 +5,12 @@ import QuizDetails from './QuizDetail';
 import Header from '../components/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+
 const QuizList:React.FC<{  newQuiz?: IQuiz}> = ({newQuiz}) => {
     const [quizzes, setQuizzes] = useState<IQuiz[]>([]);
     const [selectedQuiz, setSelectedQuiz] = useState<IQuiz>();
+    const navigate = useNavigate();
     const deleteQuiz = async (quizId : string) => {
         try {
             await API_DELETE(`/quizzes/${quizId}`);
@@ -40,6 +43,9 @@ const QuizList:React.FC<{  newQuiz?: IQuiz}> = ({newQuiz}) => {
                         {quiz.title}
                         <button className='ml-4' onClick={(e) => {e.stopPropagation();deleteQuiz(quiz._id)}}>
                         <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                        <button className="btn btn-warning me-2" onClick={(e) => { e.stopPropagation(); navigate(`/edit/${quiz._id}`,{ state: { quiz } });}}>
+                            <i className="bi bi-pencil"></i>
                         </button>
                     </li>
                 ))}
