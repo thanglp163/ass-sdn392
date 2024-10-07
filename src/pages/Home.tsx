@@ -4,7 +4,7 @@ import { API_DELETE, API_GET } from '../service/Quiz';
 import QuizDetails from './QuizDetail';
 import Header from '../components/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const QuizList:React.FC<{  newQuiz?: IQuiz}> = ({newQuiz}) => {
@@ -45,7 +45,7 @@ const QuizList:React.FC<{  newQuiz?: IQuiz}> = ({newQuiz}) => {
                         <FontAwesomeIcon icon={faTrash} />
                         </button>
                         <button className="btn btn-warning me-2" onClick={(e) => { e.stopPropagation(); navigate(`/edit/${quiz._id}`,{ state: { quiz } });}}>
-                            <i className="bi bi-pencil"></i>
+                        <FontAwesomeIcon icon={ faPen} />
                         </button>
                     </li>
                 ))}
